@@ -1,0 +1,640 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5efe6;
+    overflow-x: hidden;
+}
+
+.screen {
+    display: none;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.active {
+    display: flex;
+}
+
+button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    background: #e57373;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #ef5350;
+}
+
+.cartas {
+    display: flex;
+    flex-wrap: wrap; /* Permite quebrar linha se a tela for pequena */
+    gap: 30px;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* --- ESTILO DO ENVELOPE --- */
+
+/* Container geral (Envelope + Texto) */
+.carta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    gap: 12px;
+}
+
+.carta:hover {
+    transform: translateY(-10px);
+}
+
+/* O corpo retangular do envelope */
+.envelope-visual {
+    width: 160px;
+    height: 100px;
+    background-color: #e0d8cc; /* Fundo interno escuro (sombra dentro) */
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    display: flex;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+/* Parte de baixo do envelope (o triângulo grande) */
+.envelope-visual::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    /* Isso cria as abas laterais e inferior */
+    border-width: 0 80px 60px 80px;
+    border-color: transparent transparent #fdfbf7 transparent; /* Cor do papel */
+    z-index: 2;
+}
+
+/* A aba superior (o fecho do envelope) */
+.aba {
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 55px 80px 0 80px;
+    border-color: #f2efe9 transparent transparent transparent; /* Um pouco mais escuro que a frente */
+    z-index: 3;
+    transform-origin: top;
+    transition: transform 0.4s ease;
+}
+
+/* Animação de abrir a aba */
+.carta:hover .aba {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+/* Estilo do título embaixo */
+.titulo {
+    font-weight: bold;
+    color: #5d4037;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+/* --- OUTROS --- */
+
+#conteudo {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-width: 400px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-top: 20px;
+    color: #333;
+}
+
+.voltar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+/* =========================
+   CARTA 1 — ÁGUA-VIVA (REFORMULADA)
+========================= */
+
+.carta-agua-viva {
+    position: relative;
+    /* Gradiente inspirado na Imagem 2 (Ciano -> Azul profundo) */
+    background: linear-gradient(180deg, #115be6e0 0%, #0995e6d8 100%); 
+    /* Se quiser mais escuro como na Imagem 1, troque por:
+       background: linear-gradient(180deg, #2b5876 0%, #4e4376 100%); */
+    width: 100%;
+    height: 500px; /* Altura fixa para garantir o layout */
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* --- Texto --- */
+.texto-container {
+    z-index: 10;
+    text-align: center;
+    color: #fff;
+    padding: 20px;
+    /* Sombra no texto para leitura fácil sobre o azul */
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.texto-agua {
+    font-family: 'Patrick Hand', cursive; /* A fonte manuscrita */
+    font-size: 24px;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.texto-agua strong {
+    font-size: 28px;
+    text-transform: uppercase;
+    color: #e0f7fa; /* Um azul bem clarinho para destaque */
+}
+
+.autor-agua {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 16px;
+    opacity: 0.8;
+}
+
+/* --- Água-viva (Canto Superior Direito) --- */
+.medusa-container {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 150px;
+    height: 180px;
+    opacity: 0.8;
+    transform: rotate(-15deg); /* Leve inclinação */
+    animation: flutuarSuave 6s ease-in-out infinite;
+}
+
+.medusa-cabeca {
+    width: 100px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50% 50% 10% 10%;
+    margin: 0 auto;
+    position: relative;
+    box-shadow: inset 0 0 15px rgba(255,255,255,0.6);
+    border-top: 2px solid rgba(255,255,255,0.8);
+}
+
+.tentaculos {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: -5px;
+}
+
+.tentaculo {
+    width: 4px;
+    height: 80px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 4px;
+    animation: tentaculosMover 3s ease-in-out infinite alternate;
+}
+
+/* Faz cada tentáculo mover em tempo diferente */
+.tentaculo:nth-child(1) { height: 70px; animation-delay: 0s; }
+.tentaculo:nth-child(2) { height: 90px; animation-delay: 0.5s; }
+.tentaculo:nth-child(3) { height: 85px; animation-delay: 0.2s; }
+.tentaculo:nth-child(4) { height: 60px; animation-delay: 0.7s; }
+
+/* --- Bolhas (Canto Inferior Esquerdo) --- */
+.cluster-bolhas {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    width: 100px;
+    height: 100px;
+}
+
+.bolha {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(255,255,255,0.1));
+    box-shadow: 0 0 5px rgba(255,255,255,0.3);
+    animation: subirBolha 5s linear infinite;
+}
+
+/* Tamanhos e posições variadas como na imagem 2 */
+.b1 { width: 40px; height: 40px; bottom: 0; left: 0; animation-duration: 6s; }
+.b2 { width: 25px; height: 25px; bottom: 35px; left: 35px; animation-duration: 5s; animation-delay: 1s;}
+.b3 { width: 15px; height: 15px; bottom: 10px; left: 50px; animation-duration: 7s; animation-delay: 2s;}
+.b4 { width: 10px; height: 10px; bottom: 60px; left: 10px; animation-duration: 4s; animation-delay: 0.5s;}
+
+/* --- Animações --- */
+@keyframes flutuarSuave {
+    0%, 100% { transform: translateY(0) rotate(-15deg); }
+    50% { transform: translateY(15px) rotate(-10deg); }
+}
+
+@keyframes tentaculosMover {
+    0% { transform: skewX(5deg); }
+    100% { transform: skewX(-5deg); }
+}
+
+@keyframes subirBolha {
+    0% { transform: translateY(0); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateY(-50px); opacity: 0; }
+}
+/* =========================
+   CARTA 2 — IVY (CSS PURO)
+========================= */
+
+.carta-ivy-css {
+    position: relative;
+    /* Fundo bege texturizado inspirado na Imagem 2 */
+    background: #fdfbf7; 
+    /* Borda interna para parecer um cartão chique */
+    box-shadow: inset 0 0 0 10px #eaddcf, 0 10px 25px rgba(0,0,0,0.1);
+    width: 100%;
+    height: 500px;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- Texto --- */
+.texto-ivy-container {
+    z-index: 10;
+    text-align: center;
+    color: #5d4037; /* Marrom café suave */
+    padding: 20px;
+}
+
+.texto-ivy {
+    font-family: 'Patrick Hand', cursive; /* Mantendo a fonte manuscrita */
+    font-size: 26px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.texto-ivy strong {
+    font-size: 32px;
+    color: #d81b60; /* Um rosa escuro para destacar a palavra */
+    font-weight: normal;
+    font-style: italic;
+}
+
+.autor-ivy {
+    font-family: 'Georgia', serif; /* Contraste com serifa para o autor */
+    font-size: 14px;
+    font-style: italic;
+    color: #8d6e63;
+    display: block;
+    margin-top: 10px;
+}
+
+/* --- Construção da Flor (Lírio Stylizado) --- */
+.flor-container {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    z-index: 1;
+    /* Animação suave de "respirar" */
+    animation: balancoFlor 6s ease-in-out infinite alternate;
+}
+
+/* Posicionamento dos Lírios */
+.topo-esquerda {
+    top: -20px;
+    left: -20px;
+    transform: rotate(135deg); /* Aponta para dentro */
+}
+
+.base-direita {
+    bottom: -20px;
+    right: -20px;
+    transform: rotate(-45deg); /* Aponta para dentro */
+}
+
+/* As Pétalas */
+.petala {
+    position: absolute;
+    width: 50px;
+    height: 90px;
+    background: linear-gradient(to bottom, #f8bbd0, #e91e63); /* Gradiente Rosa */
+    border-radius: 50% 50% 10% 10%; /* Formato de gota */
+    top: 50%;
+    left: 50%;
+    transform-origin: bottom center;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    opacity: 0.9;
+}
+
+/* Girando as pétalas para formar a flor */
+.petala.p1 { transform: translate(-50%, -100%) rotate(0deg); }
+.petala.p2 { transform: translate(-50%, -100%) rotate(90deg); }
+.petala.p3 { transform: translate(-50%, -100%) rotate(180deg); }
+.petala.p4 { transform: translate(-50%, -100%) rotate(270deg); }
+
+/* Miolo da flor (Estames) */
+.miolo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    background: #ffeb3b; /* Amarelo */
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    box-shadow: 0 0 10px rgba(255, 193, 7, 0.6);
+}
+
+.estame {
+    position: absolute;
+    width: 2px;
+    height: 35px;
+    background: #ffeb3b;
+    bottom: 5px;
+    left: 4px;
+    transform-origin: bottom center;
+}
+
+.estame.e1 { transform: rotate(-30deg); }
+.estame.e2 { transform: rotate(30deg); }
+.estame.e3 { transform: rotate(0deg) scaleY(1.2); }
+
+/* Pontinha do estame */
+.estame::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -2px;
+    width: 6px;
+    height: 4px;
+    background: #fbc02d;
+    border-radius: 50%;
+}
+
+/* Animação */
+@keyframes balancoFlor {
+    0% { transform: rotate(var(--rotacao-inicial, 0deg)) scale(1); }
+    100% { transform: rotate(var(--rotacao-inicial, 0deg)) scale(1.05); }
+}
+
+/* Ajuste específico para a animação funcionar com a rotação original */
+.topo-esquerda { --rotacao-inicial: 135deg; }
+.base-direita { --rotacao-inicial: -45deg; }
+
+/* =========================
+   CARTA 3 — NOITE ESTELAR (TAMANHO AMPLIADO)
+========================= */
+
+.carta-estelar {
+    position: relative;
+    /* Azul marinho profundo inspirado na foto real */
+    background: radial-gradient(circle at bottom, #1b2735 0%, #090a0f 100%);
+    width: 420px; /* Mesmo tamanho da Carta 1 */
+    height: 500px; /* Mesmo tamanho da Carta 1 */
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+}
+
+/* --- Estrelas Fixas (Pulsantes) --- */
+.estrela-fixa {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: pulsarEstrela 3s infinite ease-in-out alternate;
+}
+
+/* --- Texto Centralizado --- */
+.texto-estelar-container {
+    z-index: 10;
+    text-align: center;
+    color: #ffffff;
+    padding: 20px;
+}
+
+.texto-noite {
+    font-family: 'Patrick Hand', cursive; 
+    font-size: 30px; /* Aumentado para preencher melhor o espaço */
+    line-height: 1.4;
+    text-shadow: 0 0 15px rgba(255,255,255,0.6);
+}
+
+.texto-noite strong {
+    display: block;
+    font-size: 42px;
+    color: #fff9c4; 
+    margin-top: 10px;
+}
+
+.data-beijo {
+    font-family: 'Georgia', serif;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    opacity: 0.8;
+    display: block;
+    margin-top: 20px;
+}
+
+/* --- Estrelas Cadentes --- */
+.estrela-cadente {
+    position: absolute;
+    top: 15%;
+    left: -10%;
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, white, transparent);
+    transform: rotate(35deg);
+    animation: cadente 7s infinite ease-in;
+    z-index: 5;
+    opacity: 0;
+}
+
+/* --- Animações --- */
+@keyframes pulsarEstrela {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.4); box-shadow: 0 0 10px white; }
+}
+
+@keyframes cadente {
+    0% { transform: translateX(0) rotate(35deg); opacity: 0; }
+    5% { opacity: 0.8; }
+    25% { transform: translateX(1000px) rotate(35deg); opacity: 0; }
+    100% { opacity: 0; }
+}
+
+/* =========================
+   CARTA 4 — RAPUNZEL (CORRIGIDA)
+========================= */
+
+.carta-rapunzel-v2 {
+    position: relative;
+    background: linear-gradient(to bottom, #2c3e50, #4b6cb7, #928dab);
+    width: 420px;
+    height: 500px;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center;     /* Centraliza verticalmente */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+
+/* --- Texto --- */
+.texto-rapunzel-container {
+    z-index: 20;
+    text-align: center;
+    pointer-events: none; /* Garante que o texto não atrapalhe cliques */
+}
+
+.texto-caligrafia {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 30px;
+    color: #f7f1e3;
+    line-height: 1.3;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+.texto-caligrafia .destaque {
+    font-size: 48px;
+    display: block;
+    color: #ffeaa7;
+    margin: 10px 0;
+}
+
+/* --- Silhueta do Reino (Roxo/Azul Profundo) --- */
+.reino-background {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 120px;
+    z-index: 5;
+}
+
+.castelo-silhueta {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 100px;
+    background: #6c5ce7;
+    /* Formato simplificado de castelo com torres */
+    clip-path: polygon(0% 100%, 20% 100%, 20% 40%, 35% 40%, 35% 0%, 50% 20%, 65% 0%, 65% 40%, 80% 40%, 80% 100%, 100% 100%);
+}
+
+.montanha-esq, .montanha-dir {
+    position: absolute;
+    bottom: -10px;
+    background: #5849ce;
+    width: 60%;
+    height: 80px;
+}
+
+.montanha-esq {
+    left: -10%;
+    border-radius: 100% 100% 0 0;
+    transform: rotate(5deg);
+}
+
+.montanha-dir {
+    right: -10%;
+    border-radius: 100% 100% 0 0;
+    transform: rotate(-5deg);
+}
+
+/* --- Lanternas --- */
+.lanterna-v2 {
+    position: absolute;
+    bottom: -30px;
+    width: 10px;
+    height: 14px;
+    background: #fdcb6e;
+    border-radius: 2px;
+    box-shadow: 0 0 15px #ffeaa7;
+    animation: subirLanternaV2 12s linear infinite;
+    z-index: 10;
+}
+
+@keyframes subirLanternaV2 {
+    0% { transform: translateY(0) scale(1); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(-550px) scale(0.5); opacity: 0; }
+}
+/* =========================
+   CARTA 5 — FINAL (VERSÃO CLEAN)
+========================= */
+
+.carta-final-limpa {
+    position: relative;
+    background: #ffffff; 
+    width: 420px;
+    height: 500px;
+    border-radius: 20px;
+    overflow-y: auto; 
+    padding: 50px;
+    box-sizing: border-box;
+    display: block;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    /* Uma borda muito sutil apenas para dar acabamento */
+    border: 1px solid #eee;
+}
+
+/* Deixando a barra de rolagem quase invisível */
+.carta-final-limpa::-webkit-scrollbar {
+    width: 4px;
+}
+.carta-final-limpa::-webkit-scrollbar-thumb {
+    background: #f0f0f0;
+    border-radius: 10px;
+}
+
+.texto-final-container {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 19px;
+    color: #333;
+    line-height: 1.7; /* Aumentei o espaçamento entre linhas para ficar mais elegante */
+    text-align: center;
+}
+
+.texto-final-container p {
+    margin-bottom: 20px;
+}
+
+.assinatura-final {
+    font-size: 26px;
+    color: #d63031;
+    margin-top: 30px;
+    font-weight: bold;
+}

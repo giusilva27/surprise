@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caixa de Cartas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="home" class="screen active">
+        <p>Feliz aniversário!</p>
+        <button onclick="abrirCaixa()">CLIQUE AQUI</button>
+    </div>
+
+    <div id="caixa" class="screen">
+        <div class="cartas">
+            <div class="carta" onclick="abrirCarta(1)">
+                <div class="envelope-visual">
+                    <div class="aba"></div>
+                </div>
+                <span class="titulo">Carta 1</span>
+            </div>
+
+            <div class="carta" onclick="abrirCarta(2)">
+                <div class="envelope-visual">
+                    <div class="aba"></div>
+                </div>
+                <span class="titulo">Carta 2</span>
+            </div>
+
+            <div class="carta" onclick="abrirCarta(3)">
+                <div class="envelope-visual">
+                    <div class="aba"></div>
+                </div>
+                <span class="titulo">Carta 3</span>
+            </div>
+
+            <div class="carta" onclick="abrirCarta(4)">
+                <div class="envelope-visual">
+                    <div class="aba"></div>
+                </div>
+                <span class="titulo">Carta 4</span>
+            </div>
+
+            <div class="carta" onclick="abrirCarta(5)">
+                <div class="envelope-visual">
+                    <div class="aba"></div>
+                </div>
+                <span class="titulo">Carta 5</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="carta-aberta" class="screen">
+        <button class="voltar" onclick="voltar()">Voltar</button>
+        <div id="conteudo"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
